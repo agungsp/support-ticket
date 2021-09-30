@@ -17,14 +17,6 @@
                 <tbody>
                     <tr>
                         <th>
-                            {{ trans('cruds.ticket.fields.id') }}
-                        </th>
-                        <td>
-                            {{ $ticket->id }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.ticket.fields.created_at') }}
                         </th>
                         <td>
@@ -121,7 +113,7 @@
                             @empty
                                 <div class="row">
                                     <div class="col">
-                                        <p>There are no comments.</p>
+                                        <p>Tidak ada balasan</p>
                                     </div>
                                 </div>
                                 <hr />
@@ -129,10 +121,18 @@
                             <form action="{{ route('admin.tickets.storeComment', $ticket->id) }}" method="POST" id="add-comment">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="comment_text">Leave a comment</label>
+                                    <label for="comment_text">Tinggalkan balasan</label>
                                     <textarea class="form-control" id="comment_text" name="comment_text" rows="3" required></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary">@lang('global.submit')</button>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <button type="submit" class="btn btn-primary btn-block">@lang('global.submit')</button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p class="btn" id="loading"></p>
+                                    </div>
+                                </div>
+                                
                             </form>
                         </td>
                     </tr>
@@ -163,6 +163,7 @@
 <script>
     $('#add-comment').one('submit', function() {
         $(this).find('button[type="submit"]').attr('disabled','disabled');
+        $('#loading').html('Tunggu sebentar...');
     });
 </script>
 @endsection
