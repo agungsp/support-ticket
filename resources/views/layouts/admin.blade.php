@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
     <meta charset="utf-8">
@@ -24,7 +23,7 @@
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-          @can('dashboard_access')
+         
               <!-- Sidebar - Brand -->
               <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route("admin.home") }}">
                   <div class="sidebar-brand-icon rotate-n-15">
@@ -42,17 +41,14 @@
                       <i class="fas fa-fw fa-tachometer-alt"></i>
                       <span>{{ trans('global.dashboard') }}</span></a>
               </li>
-            @endcan
-            <!-- Divider -->
-            <hr class="sidebar-divider">
 
+           @can('user_management_access')
             <!-- Heading -->
             <div class="sidebar-heading">
                 Managements
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            @can('user_management_access')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
@@ -129,8 +125,6 @@
               </a>
               @endcan
           </li>
-
-          
             <!-- Nav Item - Project -->
             <li class="nav-item">
               @can('comment_access')
@@ -142,6 +136,18 @@
               @endcan
           </li>
 
+          <!-- Divider -->
+          <hr class="sidebar-divider d-none d-md-block">
+                 <!-- Nav Item - Project -->
+            <li class="nav-item">
+               
+                <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
+                  <i class="fas fa-sign-out-alt"></i>
+                    <span>{{ trans('global.logout') }}</span>
+                    </a>
+                </a>
+                
+            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -170,7 +176,7 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                        <div class="topbar-divider d-none d-sm-block"></div>
+                        {{-- <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
@@ -198,10 +204,10 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    {{ trans('global.logout') }}
                                 </a>
                             </div>
-                        </li>
+                        </li> --}}
                     </ul>
                 </nav>
                 <!-- End of Topbar -->
@@ -235,9 +241,9 @@
         <i class="fas fa-angle-up"></i>
     </a>
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      {{ csrf_field() }} 
+      <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Yakin keluar?</h5>
@@ -248,16 +254,17 @@
                 <div class="modal-body">Pilih Keluar untuk mengakhiri.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                    <button class="btn btn-danger" type="button" data-dismiss="modal">Keluar</button>
+                    <a href="{{ route('logout') }}" class="btn btn-danger" type="submit" data-dismiss="modal">Keluar</a>
                 </div>
             </div>
         </div>
     </div>
 
-     <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
-            {{ csrf_field() }}
-    </form>
+    {{-- Logout Form --}}
 
+    <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
+      {{ csrf_field() }}
+    </form>
 
      <!-- Bootstrap core JavaScript-->
      <script src="{{ asset('theme/vendor/jquery/jquery.min.js') }}"></script>
