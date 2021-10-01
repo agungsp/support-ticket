@@ -112,9 +112,8 @@
                     <i class="fas fa-ticket-alt"></i>
                     <span>{{ trans('cruds.ticket.title') }}</span>
                 </a>
-                @endcan
             </li>
-            
+            @endcan
 
             <!-- Nav Item - Comments -->
             <li class="nav-item">
