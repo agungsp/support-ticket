@@ -1,13 +1,21 @@
 @extends('layouts.admin')
 @section('content')
 @can('ticket_create')
-    <div style="margin-bottom: 10px;" class="row">
+
+<div class="mb-4">
+  <a href="{{ route("admin.tickets.create") }}"class="btn btn-success btn-circle btn-md">
+      <i class="fas fa-plus"></i>
+  </a> 
+<p style="display: inline">{{ trans('global.add') }} {{ trans('cruds.ticket.title_singular') }}</p>
+</div>
+
+    {{-- <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
             <a class="btn btn-success" href="{{ route("admin.tickets.create") }}">
                 {{ trans('global.add') }} {{ trans('cruds.ticket.title_singular') }}
             </a>
         </div>
-    </div>
+    </div> --}}
 @endcan
 <div class="card">
     <div class="card-header">
@@ -19,7 +27,7 @@
         </div>
     @endif
     <div class="card-body">
-        <table class=" table table-bordered table-striped table-hover ajaxTable datatable datatable-Ticket">
+        <table class=" table table-responsive table-bordered table-striped table-hover ajaxTable datatable datatable-Ticket">
             <thead>
                 <tr>
                     <th width="10">

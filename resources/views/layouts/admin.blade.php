@@ -214,11 +214,11 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                  <!-- Content Row -->
-                    <div class="card shadow mb-4">
+                    
                       
                         @yield('content')
                       
-                    </div>
+                    
                 </div>
                 <!-- /.container-fluid -->
             </div>
