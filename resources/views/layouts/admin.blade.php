@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="icon" href="{{ asset('theme/img/ticket.png') }}">
     <title>E - Ticket</title>
         <!-- Custom fonts for this template-->
         <link href="{{ asset('theme/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -34,15 +35,18 @@
 
               <!-- Divider -->
               <hr class="sidebar-divider my-0">
-
+        
               <!-- Nav Item - Dashboard -->
               <li class="nav-item active">
-                  <a class="nav-link" href="{{ route("admin.home") }}">
-                      <i class="fas fa-fw fa-tachometer-alt"></i>
-                      <span>{{ trans('global.dashboard') }}</span></a>
+                  @can('dashboard_access')
+                    <a class="nav-link" href="{{ route("admin.home") }}">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>{{ trans('global.dashboard') }}</span>
+                    </a>
+                  @endcan
               </li>
 
-           @can('user_management_access')
+            @can('user_management_access')
             <!-- Heading -->
             <div class="sidebar-heading">
                 Managements
@@ -97,8 +101,6 @@
                 </div>
             </li>
             @endcan
-            <!-- Divider -->
-            <hr class="sidebar-divider">
 
             <!-- Heading -->
             <div class="sidebar-heading">
@@ -106,7 +108,7 @@
             </div>
 
             <!-- Nav Item - Ticket -->
-            @can('ticket_access')
+            @can('dashboard_access')
             <li class="nav-item">
                 <a class="nav-link" href="{{ route("admin.tickets.index") }}">
                     <i class="fas fa-ticket-alt"></i>
@@ -135,8 +137,6 @@
               @endcan
           </li>
 
-          <!-- Divider -->
-          <hr class="sidebar-divider d-none d-md-block">
                  <!-- Nav Item - Project -->
             <li class="nav-item">
                
@@ -148,8 +148,7 @@
                 
             </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
+    
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
@@ -233,47 +232,47 @@
             <!-- End of Footer -->
         </div>
         <!-- End of Content Wrapper -->
-    </div>
-    <!-- End of Page Wrapper -->
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      {{ csrf_field() }} 
-      <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Yakin keluar?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Pilih Keluar untuk mengakhiri.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                    <a href="{{ route('logout') }}" class="btn btn-danger" type="submit" data-dismiss="modal">Keluar</a>
+        </div>
+        <!-- End of Page Wrapper -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        {{ csrf_field() }} 
+        <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Yakin keluar?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Pilih Keluar untuk mengakhiri.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+                        <a href="{{ route('logout') }}" class="btn btn-danger" type="submit" data-dismiss="modal">Keluar</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    {{-- Logout Form --}}
+        {{-- Logout Form --}}
 
-    <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
-      {{ csrf_field() }}
-    </form>
+        <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
+        {{ csrf_field() }}
+        </form>
 
-     <!-- Bootstrap core JavaScript-->
-     <script src="{{ asset('theme/vendor/jquery/jquery.min.js') }}"></script>
-     <script src="{{ asset('theme/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
- 
-     <!-- Core plugin JavaScript-->
-     <script src="{{ asset('theme/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
- 
-     <!-- Custom scripts for all pages-->
-     <script src="{{ asset('theme/js/sb-admin-2.min.js') }}"></script>
+        <!-- Bootstrap core JavaScript-->
+        <script src="{{ asset('theme/vendor/jquery/jquery.min.js') }}"></script>
+        <script src="{{ asset('theme/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    
+        <!-- Core plugin JavaScript-->
+        <script src="{{ asset('theme/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+    
+        <!-- Custom scripts for all pages-->
+        <script src="{{ asset('theme/js/sb-admin-2.min.js') }}"></script>
 
 </body>
 
